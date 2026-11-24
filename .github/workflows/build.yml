@@ -1,0 +1,97 @@
+# When Dual Subs sends a list (a locked file in inbox/), build the episode: sentences, Tom's clips, library.
+# Then publish site/ to GitHub Pages. Also runs for any other change pushed to main.
+name: Build and publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: macaron
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Anything in the inbox?
+        id: inbox
+        run: echo "count=$(find inbox -name '*.enc' 2>/dev/null | wc -l)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-python@v5
+        if: steps.inbox.outputs.count != '0'
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tools/requirements.txt
+
+      - name: Month (Tatoeba is refreshed monthly)
+        if: steps.inbox.outputs.count != '0'
+        id: month
+        run: echo "month=$(date +%Y-%m)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        if: steps.inbox.outputs.count != '0'
+        with:
+          path: .cache
+          key: tatoeba-tom-${{ steps.month.outputs.month }}
+
+      - name: Tatoeba sentences and Tom's voice
+        if: steps.inbox.outputs.count != '0'
+        run: |
+          mkdir -p .cache && cd .cache
+          T=https://downloads.tatoeba.org/exports/per_language
+          V=https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/tom/medium
+          [ -f fra_sentences.tsv.bz2 ] || curl -sfLO $T/fra/fra_sentences.tsv.bz2
+          [ -f eng_sentences.tsv.bz2 ] || curl -sfLO $T/eng/eng_sentences.tsv.bz2
+          [ -f fra-eng_links.tsv.bz2 ] || curl -sfLO $T/fra/fra-eng_links.tsv.bz2
+          [ -f fr_FR-tom-medium.onnx ] || curl -sfLO $V/fr_FR-tom-medium.onnx
+          [ -f fr_FR-tom-medium.onnx.json ] || curl -sfLO $V/fr_FR-tom-medium.onnx.json
+          echo "bf65074ccdeeeeaa832e75edb1c0a513c01c9a972bdf085ff8a6e71ea234fd41  fr_FR-tom-medium.onnx" | sha256sum -c
+
+      - name: Tools
+        if: steps.inbox.outputs.count != '0'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q -r tools/requirements.txt
+
+      - name: Build
+        if: steps.inbox.outputs.count != '0'
+        env:
+          MACARON_PASSCODE: ${{ secrets.MACARON_PASSCODE }}
+        run: python tools/build.py --cache .cache
+
+      - name: Save
+        if: steps.inbox.outputs.count != '0'
+        run: |
+          git config user.name "macaron-builder"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A inbox site/data
+          git commit -q -m "Add episode words" && git push -q || echo "Nothing to save"
+
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
