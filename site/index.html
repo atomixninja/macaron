@@ -2,9 +2,169 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Macaron</title>
-  <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f6efe1;color:#4a5a3c;font:18px/1.5 Georgia,serif}</style>
+  <meta name="theme-color" content="#221d36">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Macaron">
+  <meta name="robots" content="noindex">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body><p>Macaron arrive bientôt.</p></body>
+<body class="is-locked">
+
+  <!-- The room at twilight. Original drawing; animated in style.css. -->
+  <header class="scene" aria-hidden="true">
+    <svg id="scene" viewBox="0 0 390 330" preserveAspectRatio="xMaxYMax slice">
+      <defs>
+        <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e2742"/><stop offset="1" stop-color="#43344d"/></linearGradient>
+        <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232552"/><stop offset=".38" stop-color="#4f4787"/><stop offset=".64" stop-color="#9c7aa6"/><stop offset=".82" stop-color="#dca39a"/><stop offset="1" stop-color="#f3c88c"/></linearGradient>
+        <linearGradient id="boards" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3328"/><stop offset="1" stop-color="#5e4232"/></linearGradient>
+        <radialGradient id="warm"><stop offset="0" stop-color="#ffc977" stop-opacity=".55"/><stop offset=".5" stop-color="#f0a95a" stop-opacity=".18"/><stop offset="1" stop-color="#f0a95a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="lampglow"><stop offset="0" stop-color="#ffe3a3" stop-opacity=".7"/><stop offset="1" stop-color="#ffe3a3" stop-opacity="0"/></radialGradient>
+        <filter id="blur3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="blur8" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="wc"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+        <clipPath id="pane"><path d="M86 232 V112 Q86 52 168 52 Q250 52 250 112 V232Z"/></clipPath>
+      </defs>
+
+      <rect width="390" height="330" fill="url(#room)"/>
+
+      <!-- Outside: twilight, hills, the village, rain -->
+      <g clip-path="url(#pane)">
+        <rect x="80" y="50" width="180" height="190" fill="url(#dusk)"/>
+        <g class="stars" fill="#fff6e0"><circle cx="110" cy="74" r=".9"/><circle cx="132" cy="64" r="1.1"/><circle cx="196" cy="70" r=".8"/><circle cx="226" cy="98" r="1"/><circle cx="150" cy="92" r=".7"/><circle cx="104" cy="104" r=".7"/></g>
+        <path d="M214 74 a12 12 0 1 0 10 18 a10 10 0 1 1 -10 -18z" fill="#fbecc4"/>
+        <circle cx="218" cy="86" r="16" fill="#fbecc4" opacity=".18" filter="url(#blur3)"/>
+        <path d="M80 182 L112 160 L134 172 L170 146 L204 166 L228 154 L262 172 V240 H80Z" fill="#5c4f86" opacity=".85"/>
+        <path d="M80 200 C110 186 140 194 168 186 S226 178 262 190 V240 H80Z" fill="#3a3463"/>
+        <path d="M80 218 C120 206 160 216 200 208 S250 204 262 210 V240 H80Z" fill="#2a2647"/>
+        <g class="village" fill="#ffd27c"><circle cx="118" cy="203" r="1.4"/><circle cx="124" cy="205" r="1"/><circle cx="188" cy="196" r="1.3"/><circle cx="194" cy="199" r="1"/><circle cx="230" cy="193" r="1.2"/></g>
+        <g class="rain" stroke="#d9d3f2" stroke-width=".9" stroke-linecap="round">
+          <path d="M96 40 l-5 15" style="--d:-.1s"/><path d="M118 62 l-5 15" style="--d:-.7s"/><path d="M140 38 l-5 15" style="--d:-.35s"/>
+          <path d="M162 80 l-5 15" style="--d:-.9s"/><path d="M184 46 l-5 15" style="--d:-.2s"/><path d="M206 88 l-5 15" style="--d:-.55s"/>
+          <path d="M236 42 l-5 15" style="--d:-1s"/><path d="M244 100 l-5 15" style="--d:-.45s"/><path d="M104 110 l-5 15" style="--d:-.8s"/>
+          <path d="M130 130 l-5 15" style="--d:-.05s"/><path d="M156 108 l-5 15" style="--d:-.65s"/><path d="M178 134 l-5 15" style="--d:-.3s"/>
+          <path d="M200 120 l-5 15" style="--d:-.95s"/><path d="M224 138 l-5 15" style="--d:-.15s"/><path d="M110 156 l-5 15" style="--d:-.5s"/>
+          <path d="M146 166 l-5 15" style="--d:-.75s"/><path d="M212 160 l-5 15" style="--d:-.25s"/><path d="M90 84 l-5 15" style="--d:-.6s"/>
+        </g>
+        <g fill="#efeaff" opacity=".5"><circle cx="122" cy="120" r="1.7"/><circle cx="180" cy="132" r="1.4"/><circle cx="232" cy="110" r="1.6"/><circle cx="150" cy="170" r="1.3"/></g>
+      </g>
+      <g filter="url(#wc)" fill="none" stroke="#6b4a36">
+        <path d="M86 232 V112 Q86 52 168 52 Q250 52 250 112 V232Z" stroke-width="9"/>
+        <path d="M168 54 V232 M88 150 H248" stroke-width="5"/>
+      </g>
+
+      <!-- Curtains -->
+      <path d="M70 44 C80 120 66 190 78 246 L62 246 C54 180 62 110 58 44Z" fill="#6c5a8a" filter="url(#wc)"/>
+      <path d="M252 44 C262 110 256 180 262 246 L276 246 C280 180 272 110 272 44Z" fill="#6c5a8a" filter="url(#wc)"/>
+      <rect x="52" y="40" width="232" height="5" rx="2" fill="#5a4132"/>
+
+      <!-- Sill: books, tea, plant -->
+      <rect x="72" y="232" width="192" height="11" rx="3" fill="#7a5640" filter="url(#wc)"/>
+      <g filter="url(#wc)"><rect x="96" y="222" width="34" height="5" fill="#8a6f9e"/><rect x="99" y="227" width="30" height="5" fill="#c99a6a"/><rect x="95" y="217" width="32" height="5" fill="#5f7a8c"/></g>
+      <g transform="translate(140 214)">
+        <path d="M0 6 h16 v8 a8 6 0 0 1 -16 0z" fill="#efe4d6"/><path d="M16 8 a4 4 0 0 1 0 6" fill="none" stroke="#efe4d6" stroke-width="2"/>
+        <g class="steam" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"><path d="M4 2 q-3 -6 1 -11 q3 -5 0 -10"/><path d="M10 2 q-3 -6 1 -11" style="--d:-1.4s"/></g>
+      </g>
+      <g transform="translate(226 206)">
+        <path d="M0 14 h18 l-3 12 h-12z" fill="#9a5a44"/>
+        <g fill="#6f8f62" filter="url(#wc)"><ellipse cx="4" cy="6" rx="4" ry="9" transform="rotate(-25 4 6)"/><ellipse cx="10" cy="2" rx="4" ry="11"/><ellipse cx="16" cy="7" rx="4" ry="8" transform="rotate(28 16 7)"/></g>
+      </g>
+
+      <!-- Bookshelf -->
+      <g filter="url(#wc)">
+        <rect x="0" y="120" width="42" height="150" fill="#3a2b2b"/>
+        <rect x="0" y="160" width="42" height="4" fill="#5a4132"/><rect x="0" y="206" width="42" height="4" fill="#5a4132"/>
+        <rect x="4" y="136" width="6" height="24" fill="#7d6a9c"/><rect x="11" y="140" width="5" height="20" fill="#c49a6c"/><rect x="17" y="134" width="7" height="26" fill="#5d7c8e"/><rect x="26" y="142" width="5" height="18" fill="#9a6a7a"/>
+        <rect x="5" y="184" width="7" height="22" fill="#6f8f62"/><rect x="13" y="188" width="5" height="18" fill="#d1b27a"/><rect x="20" y="182" width="6" height="24" fill="#8a6f9e"/>
+      </g>
+
+      <!-- Hanging lamp -->
+      <circle class="lamp-glow" cx="330" cy="70" r="70" fill="url(#lampglow)"/>
+      <line x1="330" y1="0" x2="330" y2="52" stroke="#20192b" stroke-width="1.5"/>
+      <path d="M312 66 Q330 40 348 66Z" fill="#c9a24e"/><ellipse cx="330" cy="66" rx="7" ry="3" fill="#fff1c4"/>
+
+      <!-- Floor -->
+      <rect y="262" width="390" height="68" fill="url(#boards)"/>
+      <g stroke="#3a281f" stroke-width="1" opacity=".6"><path d="M0 280 H390 M0 300 H390 M0 318 H390"/><path d="M60 262 v18 M180 280 v20 M300 262 v18 M120 300 v18 M250 300 v18"/></g>
+
+      <!-- Stove and fire -->
+      <ellipse class="fire-light" cx="330" cy="270" rx="150" ry="90" fill="url(#warm)"/>
+      <g filter="url(#wc)">
+        <rect x="322" y="96" width="13" height="100" fill="#1f1a20"/>
+        <rect x="296" y="188" width="66" height="70" rx="8" fill="#241e24"/><rect x="302" y="254" width="8" height="12" fill="#241e24"/><rect x="348" y="254" width="8" height="12" fill="#241e24"/>
+      </g>
+      <rect x="307" y="201" width="44" height="40" rx="5" fill="#1a1012"/>
+      <ellipse class="embers" cx="329" cy="230" rx="24" ry="14" fill="#f0a14a" opacity=".85" filter="url(#blur8)"/>
+      <path d="M315 239 h28 l-3 -5 h-22z" fill="#5a3a26"/>
+      <g class="flame"><path d="M317 236 C315 225 322 221 322 211 C329 219 329 225 330 229 C332 220 338 217 337 206 C346 217 346 229 342 236Z" fill="#eea445"/></g>
+      <g class="flame inner"><path d="M322 236 C321 229 325 226 326 220 C330 225 330 229 332 232 C334 226 337 224 338 218 C342 226 341 232 339 236Z" fill="#fbd77e"/></g>
+
+      <!-- Rug -->
+      <ellipse cx="236" cy="294" rx="128" ry="22" fill="#5a4a72" filter="url(#wc)"/>
+      <ellipse cx="236" cy="294" rx="112" ry="16" fill="none" stroke="#9c88b8" stroke-width="2" stroke-dasharray="6 5" opacity=".7"/>
+
+      <!-- The cat, asleep by the fire -->
+      <g transform="translate(232 290) scale(1.5) translate(-196 -250)">
+        <ellipse cx="196" cy="250" rx="44" ry="11" fill="#b78f62" filter="url(#wc)"/>
+        <g class="cat">
+          <g filter="url(#wc)">
+            <path class="tail" d="M226 244 C240 246 238 256 222 255 C205 254 182 256 172 252" fill="none" stroke="#6e6672" stroke-width="7" stroke-linecap="round"/>
+            <path d="M160 246 C158 228 178 218 198 220 C220 222 232 232 230 246 C226 254 166 254 160 246Z" fill="#6e6672"/>
+            <circle cx="170" cy="236" r="13" fill="#78707b"/>
+            <path d="M160 229 L161 215 L170 225Z M172 224 L181 213 L182 228Z" fill="#78707b"/>
+            <ellipse cx="172" cy="245" rx="8" ry="5" fill="#ece3d8"/>
+          </g>
+          <path d="M205 221 C222 223 231 233 230 245" fill="none" stroke="#f2b25e" stroke-width="2.2" stroke-linecap="round" opacity=".75"/>
+          <path d="M162.5 220 l1 5 l3.5 -2z M177 218 l-3 5 l4 1z" fill="#d7a99a" opacity=".8"/>
+          <path d="M163 237 q3 2.2 6 0 M172 237 q3 2.2 6 0" fill="none" stroke="#1f1a22" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="170.5" cy="240.5" r="1" fill="#c48f84"/>
+          <path d="M194 225 q7 -2 12 2 M200 231 q8 -2 13 2" fill="none" stroke="#554e5a" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+        </g>
+      </g>
+      <g class="zzz" font-family="Cormorant Garamond, serif" font-style="italic" fill="#e9d8b8">
+        <text x="186" y="252" font-size="15">z</text>
+        <text x="176" y="240" font-size="11" style="--d:-1.5s">z</text>
+      </g>
+    </svg>
+  </header>
+
+  <!-- Locked: the passcode -->
+  <section id="lock" class="lock">
+    <div class="kick"><i></i>macaron</div>
+    <h1 class="serif" id="lock-hello">Bonsoir.</h1>
+    <p class="lock-line">Il pleut. Tes mots t'attendent au chaud.</p>
+    <form id="lock-form" autocomplete="off">
+      <input id="passcode" class="serif" type="password" placeholder="ton mot de passe…" autocomplete="current-password" aria-label="Mot de passe" enterkeyhint="go">
+      <button type="submit" class="btn" id="enter">Entrer</button>
+      <p class="lock-msg" id="lock-msg" role="status"></p>
+    </form>
+  </section>
+
+  <!-- Unlocked -->
+  <main id="home" class="home" hidden>
+    <div class="greet">
+      <h1 class="serif"><span id="hello">Bonsoir.</span><em>Un mot de plus&nbsp;?</em></h1>
+      <p id="stats"></p>
+    </div>
+    <div class="sheet">
+      <nav class="tags" id="tags" aria-label="Épisodes"></nav>
+      <div class="ep" id="ep"></div>
+      <div id="words"></div>
+      <p class="empty" id="empty" hidden>Pas encore de mots. Envoie un épisode depuis Dual Subs, il arrive ici quelques minutes après.</p>
+      <footer class="foot">
+        <p>Sentences from <a href="https://tatoeba.org" target="_blank" rel="noopener">Tatoeba</a> (CC BY 2.0 FR). Voice: Piper “Tom”.</p>
+        <button type="button" id="lock-again" class="link">Verrouiller</button>
+      </footer>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
 </html>

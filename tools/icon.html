@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#221d36}svg{display:block}</style></head><body>
+<!-- Macaron's icon: an arched window at twilight, the moon, and the cat asleep on the sill. Rendered to PNG by tools/icons.sh. -->
+<svg width="1024" height="1024" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2340"/><stop offset="1" stop-color="#3d3049"/></linearGradient>
+  <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232552"/><stop offset=".4" stop-color="#4f4787"/><stop offset=".68" stop-color="#9c7aa6"/><stop offset=".86" stop-color="#dca39a"/><stop offset="1" stop-color="#f3c88c"/></linearGradient>
+  <radialGradient id="warm" cx=".5" cy="1" r=".8"><stop offset="0" stop-color="#ffc977" stop-opacity=".45"/><stop offset="1" stop-color="#ffc977" stop-opacity="0"/></radialGradient>
+  <clipPath id="pane"><path d="M136 380 V214 Q136 104 256 104 Q376 104 376 214 V380Z"/></clipPath>
+  <filter id="wc"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
+ </defs>
+ <rect width="512" height="512" fill="url(#room)"/>
+ <rect width="512" height="512" fill="url(#warm)"/>
+ <g clip-path="url(#pane)">
+  <rect x="120" y="96" width="272" height="300" fill="url(#dusk)"/>
+  <g fill="#fff6e0"><circle cx="186" cy="152" r="2"/><circle cx="214" cy="132" r="1.6"/><circle cx="300" cy="190" r="1.6"/><circle cx="170" cy="200" r="1.4"/></g>
+  <path d="M296 136 a22 22 0 1 0 18 33 a18 18 0 1 1 -18 -33z" fill="#fbecc4"/>
+  <path d="M120 302 L170 268 L204 286 L262 246 L314 276 L352 258 L392 280 V400 H120Z" fill="#5c4f86"/>
+  <path d="M120 330 C170 310 214 324 262 312 S350 300 392 316 V400 H120Z" fill="#3a3463"/>
+  <g fill="#ffd27c"><circle cx="186" cy="334" r="2.6"/><circle cx="196" cy="337" r="2"/><circle cx="300" cy="322" r="2.4"/></g>
+  <g stroke="#d9d3f2" stroke-width="2" stroke-linecap="round" opacity=".45"><path d="M168 120 l-8 24"/><path d="M240 160 l-8 24"/><path d="M330 120 l-8 24"/><path d="M200 230 l-8 24"/><path d="M344 214 l-8 24"/><path d="M270 268 l-8 24"/></g>
+ </g>
+ <g filter="url(#wc)" fill="none" stroke="#6b4a36"><path d="M136 380 V214 Q136 104 256 104 Q376 104 376 214 V380Z" stroke-width="16"/><path d="M256 106 V380 M138 250 H374" stroke-width="9"/></g>
+ <rect x="110" y="376" width="292" height="22" rx="6" fill="#7a5640" filter="url(#wc)"/>
+ <g transform="translate(256 372) scale(1.25) translate(-196 -250)" filter="url(#wc)">
+  <path d="M226 244 C240 246 238 256 222 255 C205 254 182 256 172 252" fill="none" stroke="#6e6672" stroke-width="7" stroke-linecap="round"/>
+  <path d="M160 246 C158 228 178 218 198 220 C220 222 232 232 230 246 C226 254 166 254 160 246Z" fill="#6e6672"/>
+  <circle cx="170" cy="236" r="13" fill="#78707b"/>
+  <path d="M160 229 L161 215 L170 225Z M172 224 L181 213 L182 228Z" fill="#78707b"/>
+  <ellipse cx="172" cy="245" rx="8" ry="5" fill="#ece3d8"/>
+ </g>
+</svg></body></html>

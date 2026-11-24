@@ -21,9 +21,16 @@ To try the builder locally (Python ≤ 3.14, ffmpeg, the files the workflow down
     MACARON_PASSCODE=… python tools/build.py --cache <folder>
     MACARON_PASSCODE=… python tools/build.py open
 
+## The site
+
+`site/` is a small offline web app (installable from Safari's "Add to Home Screen"): `index.html` holds the
+twilight scene (an original drawing, animated in `style.css`), `app.js` unlocks the library and plays the clips,
+`sw.js` keeps everything for offline use. The icon is drawn in `tools/icon.html` and rendered by `tools/icons.sh`.
+
 ## Credits
 
 - Example sentences and their English translations: [Tatoeba](https://tatoeba.org) (CC BY 2.0 FR); each
   sentence links back to its page there.
 - Voice: Piper voice [fr_FR-tom-medium](https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/tom/medium)
   (dataset AGPLv3, https://git.bksp.space/Tjiho/French-tts-model-piper).
+- Typeface: Cormorant Garamond (SIL Open Font License 1.1), see `site/fonts/README.txt`.

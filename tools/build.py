@@ -220,7 +220,7 @@ def build(passcode, cache, model):
             w['sentence'] = sentences.find(set(w['forms']))
             w['clip'] = clip(w['word'][0].upper() + w['word'][1:] + '.')
             w['sentenceClip'] = clip(w['sentence']['fr']) if w['sentence'] else None
-            del w['forms']
+            w['heard'] = [f for f in w.pop('forms') if f != w['word']]  # the forms heard in the episode
         old = next((e for e in library['episodes'] if e['id'] == ep['id']), None)
         ep['added'] = old['added'] if old else now
         ep['updated'] = now
