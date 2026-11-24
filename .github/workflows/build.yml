@@ -79,6 +79,13 @@ jobs:
           git add -A inbox site/data
           git commit -q -m "Add episode words" && git push -q || echo "Nothing to save"
 
+      # Pack the site here and publish it in the next job (GitHub's usual layout: publishing straight
+      # after packing in the same job sometimes doesn't find the pack yet).
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
   publish:
     needs: build
     runs-on: ubuntu-24.04
@@ -86,12 +93,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: main
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
       - id: deploy
         uses: actions/deploy-pages@v5
